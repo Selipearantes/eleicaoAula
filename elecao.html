@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Vereador</title>
+    <style>
+       
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+       
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+    
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #3b9c7f;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: #3b9c7f;
+            outline: none;
+        }
+
+    
+        button {
+            width: 48%;
+            padding: 12px;
+            margin: 10px 1%;
+            background-color: #3b9c7f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4fb184;
+        }
+
+        button:active {
+            background-color: #338d63;
+        }
+
+        
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+       
+        .container h1 {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cadastrar Vereador</h1>
+        <input id="nome" type="text" placeholder="Nome do Vereador" required>
+        <input id="nota" type="number" placeholder="Nota" required>
+        <div class="button-container">
+            <button onclick="cadastrarVereador()">Cadastrar Vereador</button>
+            <button onclick="calcularVencedor()">Calcular Vencedor</button>
+        </div>
+    </div>
+    
+<script>
+    const vereadores = [];
+
+    function cadastrarVereador() {
+        const nome = document.getElementById("nome").value;
+        const nota = document.getElementById("nota").value;
+        
+        if (nome && nota) {
+            const vereador = {
+                nome: nome,
+                nota: nota
+            }
+            vereadores.push(vereador);
+
+            alert('Vereador Cadastrado com sucesso!')
+        } else {
+            alert('Digite o nome e a nota!')
+        }
+    }
+
+    function calcularVencedor() {
+        if (vereadores.length > 0) {
+            let vencedor = vereadores[0];
+            for (const i in vereadores) {
+                const vereador = vereadores[i];
+                if (parseFloat(vencedor.nota) < parseFloat(vereador.nota)) {
+                    vencedor = vereador;
+                }
+            }
+            alert('O vencedor foi: ' + vencedor.nome);
+        } else {
+            alert('Faltou cadastrar um vereador!');
+        }
+    }
+</script>
+
+</body>
+</html>
